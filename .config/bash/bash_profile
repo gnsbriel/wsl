@@ -1,0 +1,17 @@
+# shellcheck shell=bash
+
+# Variable Definitions
+dotconfig="${XDG_CONFIG_HOME:-${HOME}/.config}"
+
+# PATH
+export PATH="${PATH}":"${HOME}"/.local/bin
+
+# ENVIRONMENT VARIABLES
+export LESSHISTFILE="${dotconfig}"/less/lesshst
+export WGETRC="${dotconfig}"/wget/wgetrc
+
+# BASHRC
+# shellcheck disable=SC1091
+source "${dotconfig}"/bash/bashrc
+
+unset -v dotconfig

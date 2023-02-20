@@ -1,0 +1,264 @@
+{
+    // VSCode Settings
+
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.linkedEditing": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.snippetSuggestions": "top",
+    "editor.wordWrap": "off",
+    "editor.tabSize": 4,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": false,
+        "source.sortImports": true
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[python]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.rulers": [79]
+    },
+    "editor.autoClosingDelete": "never",
+    "editor.autoClosingQuotes": "always",
+    "editor.foldingImportsByDefault": true,
+    "editor.inlayHints.padding": true,
+    "editor.lineNumbers": "relative",
+    "editor.mouseWheelZoom": true,
+    "editor.padding.top": 8,
+    "editor.renderLineHighlight": "gutter",
+    "editor.scrollbar.verticalScrollbarSize": 12,
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.tabCompletion": "on",
+    "editor.cursorBlinking": "phase",
+    "editor.quickSuggestions": {
+        "other": "inline",
+        "comments": "inline",
+        "strings": "inline"
+    },
+    "editor.suggest.preview": true,
+    "editor.wordBasedSuggestions": false,
+    "editor.rulers": [79, 120],
+
+    "python.linting.enabled": true,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pylintEnabled": false,
+    "[css]": {
+        "editor.formatOnSave": false,
+        "editor.suggest.insertMode": "replace"
+    },
+    "[javascript]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "One Dark Pro Darker",
+    "workbench.preferredDarkColorTheme": "One Dark Pro Darker",
+    "workbench.preferredLightColorTheme": "One Dark Pro Darker",
+    "workbench.preferredHighContrastColorTheme": "One Dark Pro Darker",
+    "workbench.preferredHighContrastLightColorTheme": "One Dark Pro Darker",
+    "workbench.editor.enablePreview": false,
+    "workbench.sideBar.location": "right",
+    "workbench.editor.wrapTabs": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.untitled.hint": "text",
+    "workbench.statusBar.visible": true,
+    "workbench.tree.indent": 16,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.view.alwaysShowHeaderActions": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.openPositioning": "last",
+    "workbench.editor.tabCloseButton": "left",
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.list.smoothScrolling": true,
+
+    "search.collapseResults": "alwaysCollapse",
+
+    "debug.confirmOnExit": "always",
+    "debug.toolBarLocation": "docked",
+
+    "scm.alwaysShowRepositories": true,
+    "scm.diffDecorationsGutterWidth": 2,
+    "scm.repositories.sortOrder": "name",
+
+    "diffEditor.codeLens": true,
+
+    "security.workspace.trust.startupPrompt": "always",
+
+    "emmet.showSuggestionsAsSnippets": true,
+
+    "telemetry.telemetryLevel": "off",
+
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+
+    "breadcrumbs.filePath": "off",
+
+    "window.confirmBeforeClose": "never",
+    "window.restoreWindows": "folders",
+    "window.menuBarVisibility": "visible",
+
+    "explorer.incrementalNaming": "smart",
+    "explorer.compactFolders": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+
+    // VSCode Terminal
+
+    "terminal.integrated.profiles.windows": {
+        "Bash": {
+            "path": "S:\\Program Files\\Git\\bin\\bash.exe",
+            "args": ["-i","-l"],
+            "icon": "terminal-bash",
+            "color": "terminal.ansiGreen",
+            "overrideName": true
+        },
+        "Command Prompt": {
+            "path": "C:\\Windows\\System32\\cmd.exe",
+            "args": [""],
+            "icon": "terminal-cmd",
+            "color": "terminal.ansiGreen",
+            "overrideName": true
+        },
+        "PowerShell": {
+            "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "args": [""],
+            "icon": "terminal-powershell",
+            "color": "terminal.ansiGreen",
+            "overrideName": true
+        }
+    },
+
+    "terminal.integrated.profiles.linux": {
+        "bash":null,
+        "Bash": {
+            "path": "bash",
+            "args": ["-i","-l"],
+            "icon": "terminal-bash",
+            "color": "terminal.ansiGreen",
+            "overrideName": true
+        }
+    },
+
+    "terminal.integrated.defaultProfile.windows": "Bash",
+    "terminal.integrated.defaultProfile.linux": "Bash",
+    "terminal.integrated.cwd": "",
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorWidth": 2,
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.smoothScrolling": true,
+    "terminal.integrated.tabs.focusMode": "singleClick",
+
+    // VSCode Fonts
+
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "FiraCode NF",
+    "editor.fontSize": 16,
+    "editor.codeLensFontFamily": "FiraCode NF",
+    "editor.codeLensFontSize": 16,
+    "debug.console.fontFamily": "FiraCode NF",
+    "debug.console.fontSize": 16,
+    "terminal.integrated.fontFamily": "FiraCode NF",
+    "terminal.integrated.fontSize": 16,
+    "scm.inputFontFamily": "FiraCode NF",
+    "scm.inputFontSize": 16,
+    "editor.inlayHints.fontFamily": "FiraCode NF",
+    "editor.inlayHints.fontSize": 16,
+    "markdown.preview.fontFamily": "FiraCode NF",
+    "markdown.preview.fontSize": 16,
+    "notebook.outputFontFamily": "FiraCode NF",
+    "notebook.outputFontSize": 16,
+
+    // Extentions Setting
+
+    "auto-close-tag.activationOnLanguage": ["*"],
+    "auto-rename-tag.activationOnLanguage": ["*"],
+
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.currentLine.enabled": true,
+    "gitlens.codeLens.enabled": false,
+
+    "git.autofetch": true,
+    "git.branchPrefix": "main",
+
+    "better-comments.multilineComments": true,
+    "better-comments.highlightPlainText": true,
+    "better-comments.tags": [
+        {
+            "tag": "!",
+            "color": "#FF3131",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "?",
+            "color": "#83EEFF",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "OK",
+            "color": "#39FF14",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "Todo",
+            "color": "#FF5F1F",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "Section:",
+            "color": "#FFF01F",
+            "strikethrough": false,
+            "underline": true,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        }
+    ],
+
+    "liveServer.settings.donotShowInfoMsg": true,
+
+    "shellcheck.exclude": ["2034"],
+    "shellcheck.customArgs": [
+        "-o require-variable-braces"
+    ],
+
+    "color-highlight.markRuler": false,
+
+    "material-icon-theme.hidesExplorerArrows": true,
+
+    "rainbow_csv.autodetect_separators": [
+        "TAB",
+        ",",
+        ";",
+        "|",
+        "æ"
+    ],
+
+    "code-runner.runInTerminal": true,
+    "code-runner.enableAppInsights": false,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.temporaryFileName": "TempCodeRun"
+
+}

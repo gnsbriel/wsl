@@ -1,0 +1,78 @@
+# shellcheck shell=bash
+# shellcheck disable=SC1091
+
+# IF NOT RUNNING INTERACTIVELY, DON'T DO ANYTHING
+if [[ "${-}" != *i* ]]; then
+    return
+fi
+
+# MAKE LESS MORE FRIENDLY FOR NON-TEXT INPUT FILES, SEE LESSPIPE(1)
+if [[ -x /usr/bin/lesspipe ]]; then
+    eval "$(SHELL=/bin/sh lesspipe)"
+fi
+
+# Variable Definitions
+dotconfig="${XDG_CONFIG_HOME:-${HOME}/.config}"
+
+# CUSTOMIZATION
+shopt -s histappend  # Append commands to ".bash_history"
+shopt -s checkwinsize  # Line wrap on window resize
+shopt -s autocd  # Auto cd if command is a directory
+HISTCONTROL=ignoredups  # Ignore duplicates for ".bash_history"
+HISTSIZE=10000  # Maximum line size for ".bash_history"
+HISTFILESIZE=10000  # Maximum line size for ".bash_history"
+HISTFILE="${dotconfig}"/bash/bash_history  # ".bash_history" file location
+PROMPT_COMMAND="${PROMPT_COMMAND:+${PROMPT_COMMAND}$'\n'} \
+    history -a; history -c; history -r" # This updates .bash_history after every command
+
+# SET A FANCY PROMPT (NON-COLOR, UNLESS WE KNOW WE "WANT" COLOR)
+case "${TERM}" in
+    xterm-color | *-256color)
+        color_prompt=yes
+        ;;
+esac
+
+# FORCE_COLOR_PROMPT=YES
+if [[ -n "${force_color_prompt}" ]]; then
+    if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
+        color_prompt=yes
+    else
+        color_prompt=
+    fi
+fi
+
+# TAB SUGGESTIONS, COMPLETIONS AND ALIASES
+
+# ALIASES
+if [[ ! "${EUID:-$(id -u)}" -eq 0 ]]; then
+    \source "${dotconfig}"/bash/bash_aliases
+    \source "${dotconfig}"/git/git-prompt.sh
+    \source "${dotconfig}"/git/git-completion.bash
+fi
+
+# SET VARIABLE IDENTIFYING THE CHROOT YOU WORK IN (USED IN THE PROMPT BELOW)
+if [[ -z "${debian_chroot:-}" ]] && [[ -r /etc/debian_chroot ]]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# CUSTOM PS1
+if [ "${color_prompt}" = yes ]; then
+    PS1='\
+\[\e[0;37m\]\n\[\e[0m\]\
+\[\e[1;3;33m\]$(__git_ps1 "שׂ %s")\[\e[0m\]\
+\[\e[0;37m\]\n\[\e[0m\]\
+${debian_chroot:+($debian_chroot)}\
+\[\e[0;1;37m\]>_ \[\e[0m\]\
+'
+else
+    PS1='$(__git_ps1 "שׂ %s")\n${debian_chroot:+($debian_chroot)}>_ '
+fi
+
+export NVM_DIR="${HOME}/.nvm"
+[[ -s "${NVM_DIR}/nvm.sh" ]] && \. "${NVM_DIR}/nvm.sh"  # This loads nvm
+[[ -s "${NVM_DIR}/bash_completion" ]] \
+    && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
+
+pfetch
+
+unset color_prompt force_color_prompt dotconfig

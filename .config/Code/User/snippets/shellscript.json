@@ -1,0 +1,230 @@
+{
+    "shebang": {
+        "prefix": "shebang",
+        "body": [
+            "#!/bin/bash",
+        ],
+        "description": "shebang"
+    },
+    "echo": {
+        "prefix": "e",
+        "body": [
+            "echo \"${0:Hello World}\"",
+        ],
+        "description": "echo"
+    },
+    "printf": {
+        "prefix": "printf",
+        "body": [
+            "printf \"%b${1:TEXT}%b\\n\" \"\\${${2:color:-}}\" \"\\${nc:-}\"",
+        ],
+        "description": "printf syntax"
+    },
+    "function": {
+        "prefix": "function",
+        "body": [
+            "function ${1:myfunc}() {",
+            "\t:$0",
+            "}",
+        ],
+        "description": "function"
+    },
+    "function with definitions": {
+        "prefix": "functiond",
+        "body": [
+            "#######################################",
+            "# DESCRIPTION:",
+            "#     Brief description of the operation.",
+            "# GLOBALS:",
+            "#     A list of global or modified variables.",
+            "# ARGUMENTS:",
+            "#     The expected input arguments.",
+            "# OUTPUTS:",
+            "#     What the process outputs to the terminal.",
+            "# RETURN:",
+            "#     0 if success, non-zero otherwise.",
+            "#######################################",
+            "function ${1:myfunc}() {",
+            "\t:$0",
+            "}"
+        ],
+        "description": "Function with definitions"
+    },
+    "if": {
+        "prefix": "if",
+        "body": [
+            "if ${1:[[ ${2:...} ]]}; then",
+            "\t:$0",
+            "fi",
+        ],
+        "description": "if block"
+    },
+    "if else": {
+        "prefix": "ifelse",
+        "body": [
+            "if ${1:[[ ${2:...} ]]}; then",
+            "\t:$3",
+            "else",
+            "\t:$0",
+            "fi",
+        ],
+        "description": "if else block"
+    },
+    "elif": {
+        "prefix": "elif",
+        "body": [
+            "elif ${1:[[ ${2:...} ]]}; then",
+            "\t:$0"
+        ],
+        "description": "elif block"
+    },
+    "until": {
+        "prefix": "until",
+        "body": [
+            "until ${1:[[ ${2:...} ]]}; do",
+            "\t:$0",
+            "done"
+        ],
+        "description": "until block"
+    },
+    "main": {
+        "prefix": "main",
+        "body": [
+          "function main() {",
+          "\t:$0",
+          "}",
+          "",
+          "main \"${@}\""
+        ],
+        "description": "a main function declaration with passthrough of all paramters passed to the script"
+    },
+    "const": {
+        "prefix": "const",
+        "body": [
+            "local -r ${1:var}=${2:\"${0}\"}"
+        ],
+        "description": "creates a local readonly variable (this is meant for use within functions only)"
+    },
+    "command": {
+        "prefix": "cmd",
+        "body": [
+            "\\$(${0:command})"
+        ],
+        "description": "command block"
+    },
+    "case": {
+        "prefix": "case",
+        "body": [
+            "case \"\\${${1:VAR}}\" in",
+            "\t${2:OPTION} )",
+            "\t\t:$0",
+            "\t\t;;",
+            "esac",
+        ],
+        "description": "case block"
+    },
+    "for loop": {
+        "prefix": "for",
+        "body": [
+            "for ${1:i} in \\${${2:arr}}; do",
+            "\t:$0",
+            "done",
+        ],
+        "description": "for loop"
+    },
+    "c-like for loop": {
+        "prefix": "cfor",
+        "body": [
+            "for ((i = 0 ; i < 100 ; i++)); do",
+            "\t:$0",
+            "done",
+        ],
+        "description": "c-like for loop"
+    },
+    "while loop": {
+        "prefix": "while",
+        "body": [
+            "while ${1:[[ ${2:condition} ]]}; do",
+            "\t:$0",
+            "done",
+        ],
+        "description": "while loop"
+    },
+    "quoted variable": {
+        "prefix": "var",
+        "body": [
+            "\"\\${${0:VAR}}\"",
+        ],
+        "description": "variable with quotes"
+    },
+    "unquoted variable": {
+        "prefix": "varu",
+        "body": [
+            "\\${${0:var}}",
+        ],
+        "description": "variable without quotes"
+    },
+    "test conditional": {
+        "prefix": "test",
+        "body": [
+            "[[ ${1:condition} ]] \\",
+            "\t${2:&& or ||} :$0"
+        ],
+        "description": "test conditional"
+    },
+    "substitution": {
+        "prefix": "substitution",
+        "body": [
+            "# \"\\${var%suffix}\"    # Remove suffix",
+            "# \"\\${var#prefix}\"    # Remove prefix",
+            "# \"\\${var%%suffix}\"   # Remove long suffix",
+            "# \"\\${var/%suffix}\"   # Remove long suffix",
+            "# \"\\${var##prefix}\"   # Remove long prefix",
+            "# \"\\${var/#prefix}\"   # Remove long prefix",
+            "# \"\\${var/from/to}\"   # Replace first match",
+            "# \"\\${var//from/to}\"  # Replace all",
+            "# \"\\${var/%from/to}\"  # Replace suffix",
+            "# \"\\${var/#from/to}\"  # Replace prefix"
+        ],
+        "description": "list of substitution"
+    },
+    "uppercase": {
+        "prefix": "uppercase",
+        "body": [
+            "\"\\${str^^}\"  # => \"HELLO WORLD!\"",
+        ],
+        "description": "uppercase"
+    },
+    "lowercase": {
+        "prefix": "lowercase",
+        "body": [
+            "\"\\${str,,}\"  # => \"hello world!\"",
+        ],
+        "description": "lowercase"
+    },
+    "read line": {
+        "prefix": "readline",
+        "body": [
+        "while IFS=\"\" read -r ${1:line} || [ -n \"\\${${1:line}}\" ]; do",
+        "\t:$0",
+        "done < ${2:file.txt}"
+        ],
+        "description": "read file line"
+    },
+    "array": {
+        "prefix": "array",
+        "body": [
+            "${1:arr}=(\"${2:A}\" \"${0:B}\")"
+        ],
+        "description": "array"
+    },
+    "subshell": {
+        "prefix": "subshell",
+        "body": [
+            "(",
+            "\t:$0",
+            ")"
+        ],
+        "description": "subshell"
+    }
+}

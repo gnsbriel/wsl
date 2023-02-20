@@ -1,0 +1,18 @@
+[core]
+    editor = code --wait
+
+[user]
+    name = Gabriel Nascimento
+    email = 121530351+gnsbriel@users.noreply.github.com
+
+[init]
+    defaultBranch = main
+
+[diff]
+    tool = vscode
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+[credential]
+    helper = /usr/lib/git-core/git-credential-libsecret
