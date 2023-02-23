@@ -578,80 +578,81 @@ function install-packages() {
     done < "${file}"
 }
 
+# shellcheck disable=SC1091
 function install-others() {
 
     create --directory         \
-        "${PWD}"/Downloads/Bin \
+        "${script_dir}"/Downloads/Bin \
         "${HOME}"/.local/bin/
 
     # Chrome driver
-    if [ -f "${PWD}"/Downloads/Bin/chromedriver_latest_release ]; then rm --force --verbose "${PWD}"/Downloads/Bin/chromedriver_latest_release; fi
-    curl --location https://chromedriver.storage.googleapis.com/LATEST_RELEASE --output "${PWD}"/Downloads/Bin/chromedriver_latest_release
-    LATEST_RELEASE=$( cat "${PWD}"/Downloads/Bin/chromedriver_latest_release )
-    if [ -f "${PWD}"/Downloads/Bin/chromedriver_linux64.zip ]; then rm --force --verbose "${PWD}"/Downloads/Bin/chromedriver_linux64.zip; fi
-    curl --location https://chromedriver.storage.googleapis.com/"${LATEST_RELEASE}"/chromedriver_linux64.zip --output "${PWD}"/Downloads/Bin/chromedriver_linux64.zip
-    unzip -o "${PWD}"/Downloads/Bin/'chromedriver_linux64.zip' -d "${HOME}"/.local/bin/
+    if [ -f "${script_dir}"/Downloads/Bin/chromedriver_latest_release ]; then rm --force --verbose "${script_dir}"/Downloads/Bin/chromedriver_latest_release; fi
+    curl --location https://chromedriver.storage.googleapis.com/LATEST_RELEASE --output "${script_dir}"/Downloads/Bin/chromedriver_latest_release
+    latest_release=$( cat "${script_dir}"/Downloads/Bin/chromedriver_latest_release )
+    if [ -f "${script_dir}"/Downloads/Bin/chromedriver_linux64.zip ]; then rm --force --verbose "${script_dir}"/Downloads/Bin/chromedriver_linux64.zip; fi
+    curl --location https://chromedriver.storage.googleapis.com/"${latest_release}"/chromedriver_linux64.zip --output "${script_dir}"/Downloads/Bin/chromedriver_linux64.zip
+    unzip -o "${script_dir}"/Downloads/Bin/'chromedriver_linux64.zip' -d "${HOME}"/.local/bin/
 
     # NVM (NodeJS Version Manager)
-    set   +o nounset     # Exposes unset variables
+    set +o nounset     # Exposes unset variables
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     export NVM_DIR="${HOME}/.nvm"
     [ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"                    # This loads nvm
     [ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
     nvm install --lts
     nvm use --lts
-    set   -o nounset     # Exposes unset variables
+    set -o nounset     # Exposes unset variables
 
-    VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest \
+    version=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest \
     | grep "tag_name" \
     | awk '{ print $2 }' \
     | sed 's/,$//'       \
     | sed 's/"//g' )     \
-    ; if [ -f "${PWD}"/Downloads/Bin/geckodriver-"${VERSION}"-linux64.tar.gz ]; then rm --force --verbose "${PWD}"/Downloads/Bin/geckodriver-"${VERSION}"-linux64.tar.gz; fi
-    curl --location "https://github.com/mozilla/geckodriver/releases/download/${VERSION}/geckodriver-${VERSION}-linux64.tar.gz" --output "${PWD}/Downloads/Bin/geckodriver-${VERSION}-linux64.tar.gz"
-    tar -xvzf "${PWD}/Downloads/Bin/geckodriver-${VERSION}-linux64.tar.gz" -C "${HOME}"/.local/bin/
+    ; if [ -f "${script_dir}"/Downloads/Bin/geckodriver-"${version}"-linux64.tar.gz ]; then rm --force --verbose "${script_dir}"/Downloads/Bin/geckodriver-"${version}"-linux64.tar.gz; fi
+    curl --location "https://github.com/mozilla/geckodriver/releases/download/${version}/geckodriver-${version}-linux64.tar.gz" --output "${script_dir}/Downloads/Bin/geckodriver-${version}-linux64.tar.gz"
+    tar -xvzf "${script_dir}/Downloads/Bin/geckodriver-${version}-linux64.tar.gz" -C "${HOME}"/.local/bin/
 
 }
 
 function install-fonts() {
 
-    create --directory "${PWD}"/Downloads/Fonts
+    create --directory "${script_dir}"/Downloads/Fonts
 
     # Icons (Material Design Fonts)
-    if [ -d "${PWD}"/Downloads/Fonts/MaterialDesign-Font ]; then rm --force --recursive --verbose "${PWD}"/Downloads/Bin/MaterialDesign-Font; fi
-    git clone https://github.com/Templarian/MaterialDesign-Font.git "${PWD}"/Downloads/Fonts/MaterialDesign-Font/
+    if [ -d "${script_dir}"/Downloads/Fonts/MaterialDesign-Font ]; then rm --force --recursive --verbose "${script_dir}"/Downloads/Bin/MaterialDesign-Font; fi
+    git clone https://github.com/Templarian/MaterialDesign-Font.git "${script_dir}"/Downloads/Fonts/MaterialDesign-Font/
 
     # Nerd Fonts (Hack)
-    VERSION=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest \
+    version=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest \
     | grep "tag_name" \
     | awk '{ print $2 }' \
     | sed 's/,$//'       \
     | sed 's/"//g' )     \
-    ; if [ -f "${PWD}"/Downloads/Fonts/Hack.zip ]; then rm --force --verbose "${PWD}"/Downloads/Bin/Hack.zip; fi
-    curl --location https://github.com/ryanoasis/nerd-fonts/releases/download/"${VERSION}"/Hack.zip --output "${PWD}"/Downloads/Fonts/Hack.zip
+    ; if [ -f "${script_dir}"/Downloads/Fonts/Hack.zip ]; then rm --force --verbose "${script_dir}"/Downloads/Bin/Hack.zip; fi
+    curl --location https://github.com/ryanoasis/nerd-fonts/releases/download/"${version}"/Hack.zip --output "${script_dir}"/Downloads/Fonts/Hack.zip
 
     # Nerd Fonts (FiraCode)
-    VERSION=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest \
+    version=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest \
     | grep "tag_name" \
     | awk '{ print $2 }' \
     | sed 's/,$//'       \
     | sed 's/"//g' )     \
-    ; if [ -f "${PWD}"/Downloads/Fonts/FiraCode.zip ]; then rm --force --verbose "${PWD}"/Downloads/Bin/FiraCode.zip; fi
-    curl --location https://github.com/ryanoasis/nerd-fonts/releases/download/"${VERSION}"/FiraCode.zip --output "${PWD}"/Downloads/Fonts/FiraCode.zip
+    ; if [ -f "${script_dir}"/Downloads/Fonts/FiraCode.zip ]; then rm --force --verbose "${script_dir}"/Downloads/Bin/FiraCode.zip; fi
+    curl --location https://github.com/ryanoasis/nerd-fonts/releases/download/"${version}"/FiraCode.zip --output "${script_dir}"/Downloads/Fonts/FiraCode.zip
 
     create --directory "${HOME}"/.local/share/fonts/
 
     # Install Fonts
     if [ -d "${HOME}"/.local/share/fonts/MaterialDesign-Font ]; then rm --force --recursive --verbose "${HOME}"/.local/share/fonts/MaterialDesign-Font; fi
-    cp --recursive "${PWD}"/Downloads/Fonts/MaterialDesign-Font/ "${HOME}"/.local/share/fonts/
+    cp --recursive "${script_dir}"/Downloads/Fonts/MaterialDesign-Font/ "${HOME}"/.local/share/fonts/
 
     if [ -d "${HOME}"/.local/share/fonts/Hack ]; then rm --force --recursive --verbose "${HOME}"/.local/share/fonts/Hack; fi
     mkdir --verbose --parents "${HOME}"/.local/share/fonts/Hack
-    unzip -o "${PWD}"/Downloads/Fonts/'Hack.zip' -d "${HOME}"/.local/share/fonts/Hack/
+    unzip -o "${script_dir}"/Downloads/Fonts/'Hack.zip' -d "${HOME}"/.local/share/fonts/Hack/
 
     if [ -d "${HOME}"/.local/share/fonts/FiraCode ]; then rm --force --recursive --verbose "${HOME}"/.local/share/fonts/FiraCode; fi
     mkdir --verbose --parents "${HOME}"/.local/share/fonts/FiraCode
-    unzip -o "${PWD}"/Downloads/Fonts/'FiraCode.zip' -d "${HOME}"/.local/share/fonts/FiraCode/
+    unzip -o "${script_dir}"/Downloads/Fonts/'FiraCode.zip' -d "${HOME}"/.local/share/fonts/FiraCode/
 
     # Refresh Fonts Cache
     fc-cache --really-force
@@ -781,7 +782,7 @@ function main() {
         install-packages
         install-others
         install-fonts
-        #check-installed-packages
+        check-installed-packages
     fi
 }
 
